@@ -9,7 +9,7 @@ defmodule Openpay.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      description: "Adm the core ecto app.",
+      description: "This client allows interact with openpay.mx apis.",
       package: package(),
       # exdocs
       name: "ADM Base",
