@@ -36,7 +36,14 @@ defmodule Openpay.Types.Commons do
 
     def changeset(%__MODULE__{} = error, params) do
       error
-      |> cast(params, [:category, :error_code, :description, :http_code, :request_id, :fraud_rules])
+      |> cast(params, [
+        :category,
+        :error_code,
+        :description,
+        :http_code,
+        :request_id,
+        :fraud_rules
+      ])
       |> validate_required([:category, :error_code, :description, :http_code, :request_id])
     end
 

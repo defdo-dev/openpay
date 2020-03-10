@@ -21,6 +21,7 @@ defmodule Openpay.Types.ChargeStore do
   def to_struct(%Ecto.Changeset{valid?: true} = changeset) do
     apply_changes(changeset)
   end
+
   def to_json(%__MODULE__{} = m, opts \\ []) do
     m |> Map.from_struct() |> date_iso8601(:due_date) |> Jason.encode!(opts)
   end

@@ -40,5 +40,4 @@ defmodule Openpay.Types.Customer do
     %__MODULE__{}
     |> changeset(params)
   end
-
 end

@@ -13,10 +13,11 @@ defmodule Openpay.Webhook.Management do
       |> Map.delete(:id)
       |> Types.Webhook.to_json()
 
-    endpoint = :api_env
-    |> ConfigState.get_config()
-    |> Client.get_endpoint()
-    |> (&"#{&1}/#{ConfigState.get_config(:merchant_id)}/webhooks").()
+    endpoint =
+      :api_env
+      |> ConfigState.get_config()
+      |> Client.get_endpoint()
+      |> (&"#{&1}/#{ConfigState.get_config(:merchant_id)}/webhooks").()
 
     headers = get_headers()
     options = get_options()
@@ -44,7 +45,6 @@ defmodule Openpay.Webhook.Management do
       {:ok, %{status_code: _} = response} -> to_error(response.body)
     end
   end
-
 
   def delete(id) when is_bitstring(id) do
     endpoint =
@@ -88,7 +88,6 @@ defmodule Openpay.Webhook.Management do
       {:ok, %{status_code: _} = response} -> to_error(response.body)
     end
   end
-
 
   # privates
   defp get_headers do

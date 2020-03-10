@@ -44,8 +44,18 @@ defmodule Openpay.Types.Webhook do
 
   def changeset(%__MODULE__{} = webhook, params) do
     events = Map.get(params, :event_types, [])
+
     webhook
-    |> cast(params, [:id, :allow_redirects, :force_host_ssl, :status, :url, :user, :password, :event_types])
+    |> cast(params, [
+      :id,
+      :allow_redirects,
+      :force_host_ssl,
+      :status,
+      :url,
+      :user,
+      :password,
+      :event_types
+    ])
     |> validate_required([:url, :user, :password, :event_types])
     |> validate_event_types(events, events_are_allowed?(events))
   end
@@ -57,11 +67,13 @@ defmodule Openpay.Types.Webhook do
 
   def get_changeset(params) do
     events = Map.get(params, :event_types, [])
+
     %__MODULE__{}
     |> cast(params, [:id, :allow_redirects, :force_host_ssl, :status, :url, :user, :event_types])
     |> validate_required([:url, :user, :event_types])
     |> validate_event_types(events, events_are_allowed?(events))
   end
+
   def to_struct(%Ecto.Changeset{valid?: true} = changeset) do
     apply_changes(changeset)
   end
@@ -69,6 +81,7 @@ defmodule Openpay.Types.Webhook do
   def to_json(%__MODULE__{} = m, opts \\ []) do
     m |> Map.from_struct() |> Jason.encode!(opts)
   end
+
   def validate_event_types(changeset, events, true) do
     put_change(changeset, :event_types, events)
   end
@@ -89,7 +102,9 @@ defmodule Openpay.Types.Webhook do
   end
 
   def event_is_allowed?(event) when is_bitstring(event), do: event in @allowed_events
-  def events_are_allowed?(events) when is_list(events), do: Enum.all?(events, &event_is_allowed?/1)
+
+  def events_are_allowed?(events) when is_list(events),
+    do: Enum.all?(events, &event_is_allowed?/1)
 
   defp string_first(str, pattern \\ ".") do
     str |> String.split(pattern) |> List.first()

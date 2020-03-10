@@ -30,12 +30,12 @@ defmodule Openpay.MixProject do
         "vcr.delete": :test,
         "vcr.check": :test,
         "vcr.show": :test
-      ],
+      ]
     ]
   end
 
   defp package do
-  [
+    [
       organization: "***REMOVED***",
       licenses: ["Apache-2.0"],
       links: %{}

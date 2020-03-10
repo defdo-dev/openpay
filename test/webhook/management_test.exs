@@ -16,17 +16,18 @@ defmodule Webhook.ManagementTest do
   test "should create an webhook struct via openpay response" do
     # the url must be available and it must return 200 for GET/POST actions
     use_cassette "webhook_create" do
-      payload = %{
-        url: "https://pgw-op-hook.us.sysb.ai/charge-store",
-        user: "FSQ82bKTqCTI4hr6w",
-        password: "aBGVWR0eK1s56zYDfoFEsHuaZqaPxzUkRz",
-        event_types: [
-          "charge.created",
-          "charge.succeeded"
-        ]
-      }
-      |> Types.Webhook.new_changeset()
-      |> Types.Webhook.to_struct()
+      payload =
+        %{
+          url: "https://pgw-op-hook.us.sysb.ai/charge-store",
+          user: "FSQ82bKTqCTI4hr6w",
+          password: "aBGVWR0eK1s56zYDfoFEsHuaZqaPxzUkRz",
+          event_types: [
+            "charge.created",
+            "charge.succeeded"
+          ]
+        }
+        |> Types.Webhook.new_changeset()
+        |> Types.Webhook.to_struct()
 
       assert webhook = Openpay.Webhook.create(payload)
       assert %Types.Webhook{} = webhook
@@ -79,16 +80,18 @@ defmodule Webhook.ManagementTest do
   @tag :webhook
   test "delete a webhook" do
     use_cassette "webhook_deleted" do
-      payload = %{
-        url: "https://pgw-op-hook.us.sysb.ai/charge-store",
-        user: "FSQ82bKTqCTI4hr6w2",
-        password: "aBGVWR0eK1s56zYDfoFEsHuaZqaPxzUkRz2",
-        event_types: [
-          "charge.created",
-        ]
-      }
-      |> Types.Webhook.new_changeset()
-      |> Types.Webhook.to_struct()
+      payload =
+        %{
+          url: "https://pgw-op-hook.us.sysb.ai/charge-store",
+          user: "FSQ82bKTqCTI4hr6w2",
+          password: "aBGVWR0eK1s56zYDfoFEsHuaZqaPxzUkRz2",
+          event_types: [
+            "charge.created"
+          ]
+        }
+        |> Types.Webhook.new_changeset()
+        |> Types.Webhook.to_struct()
+
       assert %Types.Webhook{id: id} = Openpay.Webhook.create(payload)
 
       assert "" == Openpay.Webhook.delete(id)
