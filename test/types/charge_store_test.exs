@@ -8,21 +8,23 @@ defmodule Types.ChargeStoreTest do
 
   @tag :type_charge_store
   test "should get a valid changeset" do
-    payload = %{
-      amount: 748,
-      description: "An awesome package you bought",
-      customer: %{
-        external_id: "mycustom_id_00003",
-        name: "Santiago",
-        last_name: "Contreras",
-        email: "santi@gmail.com",
-        phone_number: "5523231818"
+    payload =
+      %{
+        amount: 748,
+        description: "An awesome package you bought",
+        customer:
+          %{
+            external_id: "mycustom_id_00003",
+            name: "Santiago",
+            last_name: "Contreras",
+            email: "santi@gmail.com",
+            phone_number: "5523231818"
+          }
+          |> Types.Customer.new_changeset()
+          |> Types.Customer.to_struct()
       }
-      |> Types.Customer.new_changeset()
-      |> Types.Customer.to_struct()
-    }
-    |> Types.ChargeStore.new_changeset()
-    |> Types.ChargeStore.to_struct()
+      |> Types.ChargeStore.new_changeset()
+      |> Types.ChargeStore.to_struct()
 
     assert %Types.ChargeStore{amount: 748.0} = payload
   end

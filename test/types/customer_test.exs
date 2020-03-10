@@ -18,9 +18,10 @@ defmodule Types.CustomerTest do
     params = %{name: "", email: "yeapda.com"}
     assert changeset = Types.Customer.new_changeset(params)
     refute changeset.valid?
+
     assert changeset.errors == [
-      email: {"has invalid format", [validation: :format]},
-      name: {"can't be blank", [validation: :required]}
-    ]
+             email: {"has invalid format", [validation: :format]},
+             name: {"can't be blank", [validation: :required]}
+           ]
   end
 end

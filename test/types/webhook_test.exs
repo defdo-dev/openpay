@@ -15,6 +15,7 @@ defmodule Types.WebhookTest do
       "chargeback",
       "order"
     ]
+
     assert expected == Openpay.Types.Webhook.list_categories()
   end
 
@@ -29,7 +30,9 @@ defmodule Types.WebhookTest do
     ]
 
     assert expected == Openpay.Types.Webhook.allowed_events_by("charge")
-    assert ["subscription.charge.failed"] == Openpay.Types.Webhook.allowed_events_by("subscription")
+
+    assert ["subscription.charge.failed"] ==
+             Openpay.Types.Webhook.allowed_events_by("subscription")
   end
 
   test "should retrieve a truthy when event is allowed otherwise it will be falsy" do
@@ -38,8 +41,17 @@ defmodule Types.WebhookTest do
   end
 
   test "should retrieve a truthy when all events are allowed, otherwise it will be falsy" do
-    assert Openpay.Types.Webhook.events_are_allowed?(["order.expired", "payout.created", "charge.created"])
-    refute Openpay.Types.Webhook.events_are_allowed?(["order.expired", "payout.created", "invalid.event"])
+    assert Openpay.Types.Webhook.events_are_allowed?([
+             "order.expired",
+             "payout.created",
+             "charge.created"
+           ])
+
+    refute Openpay.Types.Webhook.events_are_allowed?([
+             "order.expired",
+             "payout.created",
+             "invalid.event"
+           ])
   end
 
   test "should retrieve a valid changeset" do
@@ -68,8 +80,12 @@ defmodule Types.WebhookTest do
         "invalid.type"
       ]
     }
+
     assert changeset = Openpay.Types.Webhook.new_changeset(payload)
     refute changeset.valid?
-    assert changeset.errors == [event_types: {"Please check your events almost one of them is invalid.", []}]
+
+    assert changeset.errors == [
+             event_types: {"Please check your events almost one of them is invalid.", []}
+           ]
   end
 end

@@ -48,20 +48,21 @@ defmodule Openpay.Charge.StoreTest do
         order_id: nil
       }
 
-      response = %{
-        amount: 199,
-        description: "An awesome package you bought",
-        customer: %Types.Customer{
-          external_id: "mycustom_id_00004",
-          name: "Santiago",
-          last_name: "Contreras",
-          email: "santi@gmail.com",
-          phone_number: "5523231818"
+      response =
+        %{
+          amount: 199,
+          description: "An awesome package you bought",
+          customer: %Types.Customer{
+            external_id: "mycustom_id_00004",
+            name: "Santiago",
+            last_name: "Contreras",
+            email: "santi@gmail.com",
+            phone_number: "5523231818"
+          }
         }
-      }
-      |> Types.ChargeStore.new_changeset()
-      |> Types.ChargeStore.to_struct()
-      |> Store.charge_commerce()
+        |> Types.ChargeStore.new_changeset()
+        |> Types.ChargeStore.to_struct()
+        |> Store.charge_commerce()
 
       assert expected == response
     end
@@ -124,21 +125,23 @@ defmodule Openpay.Charge.StoreTest do
         request_id: "32a665fa-2eb2-498b-aad5-beb58fc997d1"
       }
 
-      payload = %{
-        amount: 929,
-        description: "An awesome package you bought",
-        customer: %{
-          external_id: "mycustom_id_10000",
-          name: "Santiago",
-          last_name: "Contreras",
-          email: "santi@gmail.com",
-          phone_number: "5523231818"
+      payload =
+        %{
+          amount: 929,
+          description: "An awesome package you bought",
+          customer:
+            %{
+              external_id: "mycustom_id_10000",
+              name: "Santiago",
+              last_name: "Contreras",
+              email: "santi@gmail.com",
+              phone_number: "5523231818"
+            }
+            |> Types.Customer.new_changeset()
+            |> Types.Customer.to_struct()
         }
-        |> Types.Customer.new_changeset()
-        |> Types.Customer.to_struct()
-      }
-      |> Types.ChargeStore.new_changeset()
-      |> Types.ChargeStore.to_struct()
+        |> Types.ChargeStore.new_changeset()
+        |> Types.ChargeStore.to_struct()
 
       assert response == Store.charge_commerce(payload)
     end
