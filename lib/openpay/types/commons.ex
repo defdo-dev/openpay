@@ -57,23 +57,6 @@ defmodule Openpay.Types.Commons do
     end
   end
 
-  defmodule ErrorCard do
-    @moduledoc """
-    Openpay Error Object,
-    :deprecated to use Error it represents same error type.
-    """
-    use Ecto.Schema
-
-    @primary_key false
-    embedded_schema do
-      field(:http_code, :integer)
-      field(:error_code, :integer)
-      field(:category, :string)
-      field(:description, :string)
-      field(:request_id, :string)
-    end
-  end
-
   defmodule Store do
     @moduledoc """
     Store type
