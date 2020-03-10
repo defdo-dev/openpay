@@ -4,12 +4,12 @@ defmodule Openpay.MixProject do
   def project do
     [
       app: :openpay,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      description: "This client allows interact with openpay.mx apis.",
+      description: "This client allows interact with openpay.mx APIs.",
       package: package(),
       # exdocs
       name: "ADM Base",
