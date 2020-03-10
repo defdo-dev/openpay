@@ -22,6 +22,7 @@ defmodule Openpay.Types.Commons do
     Openpay Error Object
     """
     use Ecto.Schema
+    import Ecto.Changeset
 
     @primary_key false
     embedded_schema do
@@ -32,11 +33,27 @@ defmodule Openpay.Types.Commons do
       field(:request_id, :string)
       field(:fraud_rules, {:array, :string}, default: [])
     end
+
+    def changeset(%__MODULE__{} = error, params) do
+      error
+      |> cast(params, [:category, :error_code, :description, :http_code, :request_id, :fraud_rules])
+      |> validate_required([:category, :error_code, :description, :http_code, :request_id])
+    end
+
+    def new_changeset(params) do
+      %__MODULE__{}
+      |> changeset(params)
+    end
+
+    def to_struct(%Ecto.Changeset{valid?: true} = changeset) do
+      apply_changes(changeset)
+    end
   end
 
   defmodule ErrorCard do
     @moduledoc """
-    Openpay Error Object
+    Openpay Error Object,
+    :deprecated to use Error it represents same error type.
     """
     use Ecto.Schema
 
