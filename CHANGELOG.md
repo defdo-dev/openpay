@@ -1,3 +1,8 @@
+## 0.2.1
+
+### Enhancements
+  - Support helpers to retrieve allowed events.
+
 ## 0.2.0
 
 ### Backwards incompatible changes
@@ -6,7 +11,7 @@
   - `Types.Commons.ErrorCard` was deleted, use `Types.Commons.Error` instead.
 
 ### Enhancements
-  - Refactor modules to use %Ecto.Changeset{}.
+  - Refactor modules to use `%Ecto.Changeset{}`.
   - Support webhooks management `Openpay.Webhook.create/1`, `Openpay.Webhook.get/1`, `Openpay.Webhook.delete/1` and `Openpay.Webhook.list/0` are available.
 
 ## 0.1.0
