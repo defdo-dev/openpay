@@ -1,3 +1,8 @@
+## 0.2.2
+
+### Bug fixes
+  - Got an `undefined` event during the response from Openpay.
+
 ## 0.2.1
 
 ### Enhancements
@@ -6,8 +11,8 @@
 ## 0.2.0
 
 ### Backwards incompatible changes
-  - `Types.Request.ChargeStore` was renamed to `Types.ChargeStore`
-  - `Types.Request.Custom` was renamed to `Types.Customer`
+  - `Types.Request.ChargeStore` was renamed to `Types.ChargeStore`.
+  - `Types.Request.Custom` was renamed to `Types.Customer`.
   - `Types.Commons.ErrorCard` was deleted, use `Types.Commons.Error` instead.
 
 ### Enhancements
@@ -17,5 +22,5 @@
 ## 0.1.0
 
 ### Enhancements
-  - Charge Store
-  - Charge Card
+  - Charge Store.
+  - Charge Card.
