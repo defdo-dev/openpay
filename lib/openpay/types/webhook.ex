@@ -90,6 +90,13 @@ defmodule Openpay.Types.Webhook do
     add_error(changeset, :event_types, "Please check your events almost one of them is invalid.")
   end
 
+  def list_allowed_events, do: @allowed_events
+
+  def list_categories_with_events do
+    @allowed_events
+    |> Enum.map(fn item -> {string_first(item), item} end)
+  end
+
   def list_categories do
     @allowed_events
     |> Enum.map(&string_first/1)
