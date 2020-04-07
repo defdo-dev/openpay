@@ -12,6 +12,7 @@ defmodule Openpay.Types.Commons do
     @primary_key false
     embedded_schema do
       field(:client_secret, :string)
+      field(:client_public, :string)
       field(:api_env, :string)
       field(:merchant_id, :string)
     end
