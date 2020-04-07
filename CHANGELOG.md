@@ -1,3 +1,9 @@
+## 0.2.3
+
+### Enhancements
+  - Support `AntiFraud` module, it must be used as part of your HTML.
+  - Support `client_public` as part of the `ConfigState`.
+
 ## 0.2.2
 
 ### Bug fixes
