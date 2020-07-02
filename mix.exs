@@ -1,10 +1,12 @@
 defmodule Openpay.MixProject do
   use Mix.Project
 
+  @organization "addinteli"
+
   def project do
     [
       app: :openpay,
-      version: "0.2.2",
+      version: "0.2.3",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -36,7 +38,7 @@ defmodule Openpay.MixProject do
 
   defp package do
     [
-      organization: "addinteli",
+      organization: @organization,
       licenses: ["Apache-2.0"],
       links: %{}
     ]
