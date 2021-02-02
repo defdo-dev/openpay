@@ -66,7 +66,7 @@ defmodule Openpay.Types.Webhook do
   end
 
   def get_changeset(params) do
-    events = 
+    events =
       params
       |> Map.get(:event_types, [])
       |> Enum.filter(fn e -> e in @allowed_events end)

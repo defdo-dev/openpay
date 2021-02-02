@@ -67,7 +67,7 @@ defmodule Openpay.Utils.Commons do
     Enum.map(data, fn key -> when_is_key(key) end)
   end
 
-  defp when_is_key(data), do data
+  defp when_is_key(data), do: data
 
   defp key_to_atom(str) do
     str |> Macro.underscore() |> String.to_atom()
