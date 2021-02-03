@@ -1,4 +1,5 @@
 defmodule Openpay.MixProject do
+  @moduledoc false
   use Mix.Project
 
   @organization "addinteli"
@@ -6,7 +7,7 @@ defmodule Openpay.MixProject do
   def project do
     [
       app: :openpay,
-      version: "0.2.3",
+      version: "0.3.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -55,12 +56,14 @@ defmodule Openpay.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ecto_sql, "~> 3.2"},
-      {:money, "~> 1.4"},
+      {:ecto_sql, "~> 3.4"},
+      {:money, "~> 1.7"},
       {:httpoison, "~> 1.5"},
-      {:timex, "~> 3.5"},
+      {:timex, "~> 3.6"},
+      {:plug_cowboy, "~> 2.3"},
+      {:jason, "~> 1.2"},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
-      {:excoveralls, "~> 0.11", only: :test},
+      {:excoveralls, "~> 0.13", only: :test},
       {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
       {:exvcr, "~> 0.10", only: [:dev, :test]},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false}

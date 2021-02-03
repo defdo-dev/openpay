@@ -77,7 +77,7 @@ defmodule Openpay.Types.ChargeCard do
     add_error(changeset, :customer, "The customer is required.")
   end
 
-  defp has_payment_plan(changeset, %{payment_plan: value}) do
+  defp has_payment_plan(changeset, %{payment_plan: _value}) do
     cast_embed(changeset, :payment_plan, with: &payment_plan_changeset/2)
   end
 
