@@ -25,14 +25,13 @@ defmodule Types.ChargeCardTest do
             email: "santi@gmail.com",
             phone_number: "5523231818"
           }
-          |> Types.Customer.new_changeset()
-          |> Types.Customer.to_struct()
       }
       |> Types.ChargeCard.new_changeset()
       |> Types.ChargeCard.to_struct()
 
     assert %Types.ChargeCard{amount: 748.0} = payload
     assert is_nil(payload.payment_plan)
+    assert %Openpay.Types.Customer{} = payload.customer
   end
 
   @tag :type_charge_card

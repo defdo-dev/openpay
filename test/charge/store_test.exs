@@ -137,8 +137,6 @@ defmodule Openpay.Charge.StoreTest do
               email: "santi@gmail.com",
               phone_number: "5523231818"
             }
-            |> Types.Customer.new_changeset()
-            |> Types.Customer.to_struct()
         }
         |> Types.ChargeStore.new_changeset()
         |> Types.ChargeStore.to_struct()
