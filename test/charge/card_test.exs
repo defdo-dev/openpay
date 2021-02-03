@@ -62,7 +62,7 @@ defmodule Openpay.Charge.CardTest do
           brand: "visa",
           card_number: "411111XXXXXX1111",
           expiration_month: "12",
-          expiration_year: "20",
+          expiration_year: "25",
           holder_name: "Juan Perez Ramirez",
           type: "debit"
         },
@@ -94,7 +94,7 @@ defmodule Openpay.Charge.CardTest do
       card = %Types.Token{
         card_number: "4111111111111111",
         holder_name: "Juan Perez Ramirez",
-        expiration_year: "20",
+        expiration_year: "25",
         expiration_month: "12",
         cvv2: "110"
       }
@@ -117,8 +117,6 @@ defmodule Openpay.Charge.CardTest do
           email: "juan.vazquez@empresa.com.mx",
           phone_number: "4423456723"
         }
-        |> Types.Customer.new_changeset()
-        |> Types.Customer.to_struct()
       }
       |> Types.ChargeCard.new_changeset()
       |> Types.ChargeCard.to_struct()
