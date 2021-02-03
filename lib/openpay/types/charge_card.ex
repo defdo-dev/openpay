@@ -11,7 +11,7 @@ defmodule Openpay.Types.ChargeCard do
 
   alias Openpay.Types.Customer
   @timestamps_opts [type: :utc_datetime]
-
+  @primary_key false
   embedded_schema do
     field(:method, :string, default: "card")
     field(:amount, :float)
