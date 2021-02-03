@@ -28,7 +28,7 @@ defmodule Openpay.Charge.CardTest do
         }
       }
 
-      payload = %Types.RequestCard.CreateToken{
+      payload = %Types.Token{
         card_number: "4111111111111111",
         holder_name: "Juan Perez Ramirez",
         expiration_year: "20",
@@ -91,7 +91,7 @@ defmodule Openpay.Charge.CardTest do
         operation_date: "2020-01-27T11:26:55-06:00"
       }
 
-      card = %Types.RequestCard.CreateToken{
+      card = %Types.Token{
         card_number: "4111111111111111",
         holder_name: "Juan Perez Ramirez",
         expiration_year: "20",
@@ -99,24 +99,29 @@ defmodule Openpay.Charge.CardTest do
         cvv2: "110"
       }
 
-      contentcard = Card.create_token(card)
+      response_token = Card.create_token(card)
       val = System.system_time(:second)
       code = Integer.to_string(val)
 
-      payload = %Types.RequestCard.ChargeIdCardToken{
-        source_id: contentcard.id,
+      payload = %{
+        source_id: response_token.id,
         amount: 748,
         currency: "MXN",
         description: "Cargo inicial a mi cuenta",
         order_id: "00005" <> code,
         device_session_id: "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
-        customer: %Types.RequestCard.Customer{
+        cvv2: "110",
+        customer: %{
           name: "Juan",
           last_name: "Vazquez Juarez",
           email: "juan.vazquez@empresa.com.mx",
           phone_number: "4423456723"
         }
+        |> Types.Customer.new_changeset()
+        |> Types.Customer.to_struct()
       }
+      |> Types.ChargeCard.new_changeset()
+      |> Types.ChargeCard.to_struct()
 
       assert result = Card.charge(payload)
       assert response.card == result.card
