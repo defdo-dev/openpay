@@ -4,7 +4,6 @@
   - `Types.RequestCard.CreateToken`was renamed to `Types.Token`.
   - `Types.RequestCard.ChargeIdCardToken` was renamed to `Types.ChargeCard`.
   - `Types.RequestCard.Customer` was removed. no make sense keep it because `Types.Customer` exists.
-
 ## 0.2.3
 
 ### Enhancements
