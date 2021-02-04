@@ -28,13 +28,15 @@ defmodule Openpay.Charge.CardTest do
         }
       }
 
-      payload = %Types.Token{
+      payload = %{
         card_number: "4111111111111111",
         holder_name: "Juan Perez Ramirez",
         expiration_year: "20",
         expiration_month: "12",
         cvv2: "110"
       }
+      |> Types.Token.new_changeset()
+      |> Types.Token.to_struct()
 
       assert result = Card.create_token(payload)
       assert response.card == result.card
@@ -91,13 +93,15 @@ defmodule Openpay.Charge.CardTest do
         operation_date: "2020-01-27T11:26:55-06:00"
       }
 
-      card = %Types.Token{
+      card = %{
         card_number: "4111111111111111",
         holder_name: "Juan Perez Ramirez",
         expiration_year: "25",
         expiration_month: "12",
         cvv2: "110"
       }
+      |> Types.Token.new_changeset()
+      |> Types.Token.to_struct()
 
       response_token = Card.create_token(card)
       val = System.system_time(:second)
