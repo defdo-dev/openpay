@@ -22,10 +22,11 @@ defmodule Openpay.AntiFraud.Helpers do
   alias Openpay.ApiClient, as: Client
 
   def render_antifraud_script(device_session_id, antifraud_key) do
-    antifraud_url = :api_env
-    |> ConfigState.get_config()
-    |> Client.get_endpoint()
-    |> String.replace("v1", "antifraud/sc.js")
+    antifraud_url =
+      :api_env
+      |> ConfigState.get_config()
+      |> Client.get_endpoint()
+      |> String.replace("v1", "antifraud/sc.js")
 
     html = """
       <script type="text/javascript">
@@ -36,6 +37,7 @@ defmodule Openpay.AntiFraud.Helpers do
       </script>
       <script type="text/javascript" async src="#{antifraud_url}"></script>
     """
+
     {:safe, html}
   end
 

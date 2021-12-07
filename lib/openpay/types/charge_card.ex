@@ -33,12 +33,11 @@ defmodule Openpay.Types.ChargeCard do
     # data for apply months without interest.
 
     embeds_one :payment_plan, PaymentPlan do
-      field :payments, :string
+      field(:payments, :string)
     end
 
     # metadata usable to create custom anti fraud rules.
     field(:metadata, {:array, :map})
-
   end
 
   def to_struct(%Ecto.Changeset{valid?: true} = changeset) do
@@ -55,7 +54,17 @@ defmodule Openpay.Types.ChargeCard do
   end
 
   def changeset(%__MODULE__{} = charge_to_card, params) do
-    required = [:method, :amount, :description, :order_id, :source_id, :cvv2, :currency, :device_session_id]
+    required = [
+      :method,
+      :amount,
+      :description,
+      :order_id,
+      :source_id,
+      :cvv2,
+      :currency,
+      :device_session_id
+    ]
+
     optional = [:device_session_id, :capture, :metadata]
 
     charge_to_card
@@ -67,7 +76,6 @@ defmodule Openpay.Types.ChargeCard do
     |> has_customer?(params)
     |> has_payment_plan(params)
   end
-
 
   defp has_customer?(changeset, %{customer: customer}) do
     put_embed(changeset, :customer, customer)

@@ -73,7 +73,6 @@ defmodule Openpay.Charge.Card do
     end
   end
 
-
   defp get_headers do
     Client.get_headers("Basic #{ConfigState.get_config(:client_secret)}")
   end
@@ -84,7 +83,9 @@ defmodule Openpay.Charge.Card do
   defp get_customer(%{customer: customer}), do: %{customer: Map.from_struct(customer)}
 
   defp get_payment_plan(%{payment_plan: nil}), do: %{}
-  defp get_payment_plan(%{payment_plan: payment_plan}), do: %{customer: Map.from_struct(payment_plan)}
+
+  defp get_payment_plan(%{payment_plan: payment_plan}),
+    do: %{customer: Map.from_struct(payment_plan)}
 
   defp default_customer do
     %Types.Customer{

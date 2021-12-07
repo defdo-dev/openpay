@@ -15,13 +15,16 @@ defmodule AntiFraud.HelpersTest do
   @tag :antifraud
   test "render_components/1", %{device_session_id: device_session_id} do
     assert capture_log(fn ->
-      assert {:safe, html} = Helpers.render_components(device_session_id)
-      assert html =~ device_session_id
-    end) =~ "cacertfile/cacerts is missing"
+             assert {:safe, html} = Helpers.render_components(device_session_id)
+             assert html =~ device_session_id
+           end) =~ "cacertfile/cacerts is missing"
   end
 
   @tag :antifraud
-  test "render_antifraud_script/2", %{device_session_id: device_session_id, antifraud_key: antifraud_key} do
+  test "render_antifraud_script/2", %{
+    device_session_id: device_session_id,
+    antifraud_key: antifraud_key
+  } do
     assert {:safe, html} = Helpers.render_antifraud_script(device_session_id, antifraud_key)
     assert html =~ device_session_id
   end

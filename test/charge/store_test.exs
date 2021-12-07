@@ -129,14 +129,13 @@ defmodule Openpay.Charge.StoreTest do
         %{
           amount: 929,
           description: "An awesome package you bought",
-          customer:
-            %{
-              external_id: "mycustom_id_10000",
-              name: "Santiago",
-              last_name: "Contreras",
-              email: "santi@gmail.com",
-              phone_number: "5523231818"
-            }
+          customer: %{
+            external_id: "mycustom_id_10000",
+            name: "Santiago",
+            last_name: "Contreras",
+            email: "santi@gmail.com",
+            phone_number: "5523231818"
+          }
         }
         |> Types.ChargeStore.new_changeset()
         |> Types.ChargeStore.to_struct()

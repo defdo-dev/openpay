@@ -28,15 +28,16 @@ defmodule Openpay.Charge.CardTest do
         }
       }
 
-      payload = %{
-        card_number: "4111111111111111",
-        holder_name: "Juan Perez Ramirez",
-        expiration_year: "20",
-        expiration_month: "12",
-        cvv2: "110"
-      }
-      |> Types.Token.new_changeset()
-      |> Types.Token.to_struct()
+      payload =
+        %{
+          card_number: "4111111111111111",
+          holder_name: "Juan Perez Ramirez",
+          expiration_year: "20",
+          expiration_month: "12",
+          cvv2: "110"
+        }
+        |> Types.Token.new_changeset()
+        |> Types.Token.to_struct()
 
       assert result = Card.create_token(payload)
       assert response.card == result.card
@@ -93,37 +94,39 @@ defmodule Openpay.Charge.CardTest do
         operation_date: "2020-01-27T11:26:55-06:00"
       }
 
-      card = %{
-        card_number: "4111111111111111",
-        holder_name: "Juan Perez Ramirez",
-        expiration_year: "25",
-        expiration_month: "12",
-        cvv2: "110"
-      }
-      |> Types.Token.new_changeset()
-      |> Types.Token.to_struct()
+      card =
+        %{
+          card_number: "4111111111111111",
+          holder_name: "Juan Perez Ramirez",
+          expiration_year: "25",
+          expiration_month: "12",
+          cvv2: "110"
+        }
+        |> Types.Token.new_changeset()
+        |> Types.Token.to_struct()
 
       response_token = Card.create_token(card)
       val = System.system_time(:second)
       code = Integer.to_string(val)
 
-      payload = %{
-        source_id: response_token.id,
-        amount: 748,
-        currency: "MXN",
-        description: "Cargo inicial a mi cuenta",
-        order_id: "00005" <> code,
-        device_session_id: "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
-        cvv2: "110",
-        customer: %{
-          name: "Juan",
-          last_name: "Vazquez Juarez",
-          email: "juan.vazquez@empresa.com.mx",
-          phone_number: "4423456723"
+      payload =
+        %{
+          source_id: response_token.id,
+          amount: 748,
+          currency: "MXN",
+          description: "Cargo inicial a mi cuenta",
+          order_id: "00005" <> code,
+          device_session_id: "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+          cvv2: "110",
+          customer: %{
+            name: "Juan",
+            last_name: "Vazquez Juarez",
+            email: "juan.vazquez@empresa.com.mx",
+            phone_number: "4423456723"
+          }
         }
-      }
-      |> Types.ChargeCard.new_changeset()
-      |> Types.ChargeCard.to_struct()
+        |> Types.ChargeCard.new_changeset()
+        |> Types.ChargeCard.to_struct()
 
       assert result = Card.charge(payload)
       assert response.card == result.card

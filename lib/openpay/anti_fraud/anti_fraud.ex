@@ -24,6 +24,7 @@ defmodule Openpay.AntiFraud do
     headers = [
       "Content-Type": "text/html;charset=UTF-8"
     ]
+
     options = Client.get_options() ++ [params: %{s: device_session_id}]
 
     case HTTPoison.get(endpoint, headers, options) do

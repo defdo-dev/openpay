@@ -17,14 +17,13 @@ defmodule Types.ChargeCardTest do
         device_session_id: "randomDeviceId",
         currency: "MXN",
         order_id: "OrderID",
-        customer:
-          %{
-            external_id: "my.custom_id_00003",
-            name: "Santiago",
-            last_name: "Contreras",
-            email: "santi@gmail.com",
-            phone_number: "5523231818"
-          }
+        customer: %{
+          external_id: "my.custom_id_00003",
+          name: "Santiago",
+          last_name: "Contreras",
+          email: "santi@gmail.com",
+          phone_number: "5523231818"
+        }
       }
       |> Types.ChargeCard.new_changeset()
       |> Types.ChargeCard.to_struct()

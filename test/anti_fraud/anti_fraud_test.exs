@@ -1,4 +1,3 @@
-
 defmodule AntiFraud.AntiFraudTest do
   @moduledoc """
   AntiFraud Test
@@ -6,9 +5,10 @@ defmodule AntiFraud.AntiFraudTest do
   use ExUnit.Case, async: false
   alias Openpay.AntiFraud
 
-  setup  do
+  setup do
     {:ok, device_session_id: AntiFraud.get_device_session_id()}
   end
+
   @tag :antifraud
   test "get_device_session_id/0" do
     device_session_id = AntiFraud.get_device_session_id()
