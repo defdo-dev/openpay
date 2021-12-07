@@ -3,6 +3,8 @@ defmodule AntiFraud.HelpersTest do
   AntiFraud Tests
   """
   use ExUnit.Case, async: false
+  import ExUnit.CaptureLog
+
   alias Openpay.AntiFraud
   alias Openpay.AntiFraud.Helpers
 
@@ -12,8 +14,10 @@ defmodule AntiFraud.HelpersTest do
 
   @tag :antifraud
   test "render_components/1", %{device_session_id: device_session_id} do
-    assert {:safe, html} = Helpers.render_components(device_session_id)
-    assert html =~ device_session_id
+    assert capture_log(fn ->
+      assert {:safe, html} = Helpers.render_components(device_session_id)
+      assert html =~ device_session_id
+    end) =~ "cacertfile/cacerts is missing"
   end
 
   @tag :antifraud

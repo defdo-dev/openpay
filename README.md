@@ -1,6 +1,6 @@
 # Openpay
 
-**TODO: Add description**
+This library is a wrapper for the [Openpay API](https://openpay.mx/docs/api).
 
 ## Installation
 
@@ -10,12 +10,7 @@ by adding `openpay` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:openpay, "~> 0.2.2"}
+    {:openpay, "~> 0.3.0"}
   ]
 end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/openpay](https://hexdocs.pm/openpay).
-

@@ -18,7 +18,7 @@ defmodule Openpay.AntiFraud do
       :api_env
       |> ConfigState.get_config()
       |> Client.get_endpoint()
-      |>  String.replace("v1", "antifraud")
+      |> String.replace("v1", "antifraud")
       |> (&"#{&1}/#{ConfigState.get_config(:merchant_id)}/components").()
 
     headers = [
@@ -27,9 +27,7 @@ defmodule Openpay.AntiFraud do
     options = Client.get_options() ++ [params: %{s: device_session_id}]
 
     case HTTPoison.get(endpoint, headers, options) do
-      {:ok, response} ->
-        response.body
-        |> String.replace("\n", "")
+      {:ok, response} -> String.replace(response.body, "\n", "")
     end
   end
 
