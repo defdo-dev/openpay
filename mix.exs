@@ -8,7 +8,7 @@ defmodule Openpay.MixProject do
     [
       app: :openpay,
       version: "0.3.0",
-      elixir: "~> 1.9",
+      elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       test_coverage: [tool: ExCoveralls],

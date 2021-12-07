@@ -3,26 +3,35 @@ name: CI
 on:
   push:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
-  mix_test:
-    name: mix test (OTP ${{matrix.otp}} | Elixir ${{matrix.elixir}})
+  ci:
+    name: CI - OTP ${{matrix.otp}} | Elixir ${{matrix.elixir}}
     strategy:
       matrix:
-        otp: [21.x, 22.x]
-        elixir: [1.9.x]
+        otp: [24.x]
+        elixir: [1.12.x, 1.13.x]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-elixir@v1.0.0
+    - uses: actions/checkout@v2
+    - uses: erlef/setup-beam@v1
       with:
         otp-version: ${{matrix.otp}}
         elixir-version: ${{matrix.elixir}}
+    - uses: actions/cache@v2
+      id: cache
+      with:
+        path: |
+          deps
+          /usr/local/bin
+        key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+        restore-keys: |
+          ${{ runner.os }}-mix-
     - name: Install Dependencies
+      shell: bash
       run: |
-        mix local.rebar --force
-        mix local.hex --force
+        mix local.rebar --force && mix local.hex --force
         mix deps.get
     - name: Run Tests
       run: mix test
