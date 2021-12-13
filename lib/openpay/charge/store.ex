@@ -59,7 +59,7 @@ defmodule Openpay.Charge.Store do
   defp get_customer(%{customer: customer}), do: customer
 
   defp default_customer do
-    time = Timex.now()
+    time = DateTime.utc_now()
     {microsecond, _} = time.microsecond
     key = "#{time.second}.#{microsecond}"
 
