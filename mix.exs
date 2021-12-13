@@ -58,8 +58,8 @@ defmodule Openpay.MixProject do
     [
       {:ecto, "~> 3.4"},
       {:money, "~> 1.9"},
-      {:httpoison, "~> 1.5"},
-      {:plug_cowboy, "~> 2.3"}, # *
+      {:httpoison, "~> 1.5"},  # * dynamic usage for this dependency
+      {:plug_cowboy, "~> 2.3"},
       {:jason, "~> 1.2"},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.14", only: :test},
