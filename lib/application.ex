@@ -7,6 +7,7 @@ defmodule Openpay.Application do
 
   def start(_type, _args) do
     children = [
+      Openpay.Authz.Endpoint,
       Openpay.ConfigState
     ]
 
