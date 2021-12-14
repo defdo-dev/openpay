@@ -17,7 +17,7 @@ defmodule AntiFraud.HelpersTest do
     assert capture_log(fn ->
              assert {:safe, html} = Helpers.render_components(device_session_id)
              assert html =~ device_session_id
-           end) =~ "cacertfile/cacerts is missing"
+           end) =~ ""
   end
 
   @tag :antifraud

@@ -43,4 +43,11 @@ if Mix.env() == :test do
 
   config :openpay, Openpay.Authz.Verify, module: Openpay.Authz.VerifyMock
   config :openpay, Openpay.Authz.Refund, module: Openpay.Authz.RefundMock
+
+  # After refactor webhook & antifraud remove the following values.
+  config :openpay,
+    api_env: "sandbox",
+    merchant_id: "mjtkrswiqtxftemz4tgl",
+    client_secret: "sk_da05dc98605d4e1d880582b4ee621e84",
+    client_public: "pk_8ffec93a697248e881cd4f67d027f81a"
 end

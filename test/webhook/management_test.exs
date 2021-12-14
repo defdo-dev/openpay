@@ -1,4 +1,4 @@
-defmodule Webhook.ManagementTest do
+defmodule Openpay.Webhook.ManagementTest do
   @moduledoc """
   Webhook Management Test
   """
