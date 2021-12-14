@@ -30,9 +30,9 @@ config :openpay, Openpay.Authz.Endpoint,
 
 config :openpay,
   api_env: System.get_env("OPENPAY_API_ENV", "sandbox"),
-  merchant_id: System.fetch_env!("OPENPAY_ID"),
-  client_secret: System.fetch_env!("OPENPAY_SK"),
-  client_public: System.fetch_env!("OPENPAY_PK")
+  merchant_id: System.get_env("OPENPAY_ID"),
+  client_secret: System.get_env("OPENPAY_SK"),
+  client_public: System.get_env("OPENPAY_PK")
 
 config :openpay, Openpay.Authz.BasicAuth,
   username: System.get_env("OPENPAY_BASIC_AUTH_USERNAME"),
