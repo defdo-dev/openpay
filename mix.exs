@@ -16,9 +16,9 @@ defmodule Openpay.MixProject do
       description: "This client allows interact with openpay.mx APIs.",
       package: package(),
       # exdocs
-      name: "ADM Base",
-      source_url: "https://github.com/paridin/openpay",
-      homepage_url: "https://paridin.com",
+      name: "Openpay Client",
+      source_url: "https://github.com/defdo-dev/openpay",
+      homepage_url: "https://h.defcode.dev",
       docs: [
         # The main page in the docs
         main: "Openpay",

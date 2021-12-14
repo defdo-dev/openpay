@@ -5,15 +5,31 @@ defmodule Openpay.Authz.ControllerAuthz do
   The intention for this webhook is to handle the rules to authorize or deny a request from an store.
 
   Since the request is made via HTTP protocol, It relays on Plug to handle the interactions.
+
+  ### Configuration for verify
+
+  ```elixir
+  config :openpay, Openpay.Authz.Verify,
+    module: MyApp.Plug.Authz.Verify
+  ```
+
+  ### Configuration for refund
+
+  ```elixir
+  config :openpay, Openpay.Authz.Refund,
+    module: MyApp.Plug.Authz.Refund
+  ```
+
   """
   require Logger
   use Phoenix.Controller
-  plug(:auth when action in [:index, :verify, :refund])
+  plug(:auth when action in [:verify, :refund])
 
-  def index(conn, _opts) do
-    json(conn, heartbeat())
-  end
+  @doc """
+  Applies the provided module via config to verify it can be possible to handle the authorization.
 
+  The module must implement the `:call` function and since the Plug behavior has it, It's recommended to use it.
+  """
   def verify(conn, opts) do
     with [module: m] <- Application.get_env(:openpay, Openpay.Authz.Verify),
          conn = %Plug.Conn{} <- apply(m, :call, [conn, opts]) do
@@ -26,15 +42,13 @@ defmodule Openpay.Authz.ControllerAuthz do
         In your config.exs file add.
 
         config :openpay, Openpay.Authz.Verify,
-            module: Openpay.Authz.Example.Verify
-
-        Remember to change the module with yours.
-        Notice that the module must be a Plug.
+          module: MyApp.Plug.Authz.Verify
         """)
 
         error = %{
           error: "missing verify module configuration",
-          docs: "https://paridincom.hexdocs.pm/openpay/Openpay.html"
+          docs:
+            "https://paridincom.hexdocs.pm/openpay/Openpay.Authz.ControllerAuthz.html#module-configuration-for-verify"
         }
 
         conn
@@ -43,6 +57,11 @@ defmodule Openpay.Authz.ControllerAuthz do
     end
   end
 
+  @doc """
+  Applies the provided module via config to refund the transaction.
+
+  The module must implement the `:call` function and since the Plug behavior has it, It's recommended to use it.
+  """
   def refund(conn, opts) do
     with [module: m] <- Application.get_env(:openpay, Openpay.Authz.Refund),
          conn = %Plug.Conn{} <- apply(m, :call, [conn, opts]) do
@@ -55,30 +74,19 @@ defmodule Openpay.Authz.ControllerAuthz do
         In your config.exs file add.
 
         config :openpay, Openpay.Authz.Refund,
-            module: Openpay.Authz.Example.Refund
-
-        Remember to change the module with yours.
-        Notice that the module must be a Plug.
+          module: MyApp.Plug.Authz.Refund
         """)
 
         error = %{
           error: "missing refund module configuration",
-          docs: "https://paridincom.hexdocs.pm/openpay/Openpay.html"
+          docs:
+            "https://paridincom.hexdocs.pm/openpay/Openpay.Authz.ControllerAuthz.html#module-configuration-for-refund"
         }
 
         conn
         |> put_status(501)
         |> json(error)
     end
-  end
-
-  defp heartbeat do
-    %{
-      data: %{
-        status: "online",
-        powered_by: "defdo.dev™"
-      }
-    }
   end
 
   defp auth(conn, _opts) do

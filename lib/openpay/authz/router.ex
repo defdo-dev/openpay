@@ -11,7 +11,6 @@ defmodule Openpay.Authz.Router do
   scope "/authz", Openpay.Authz do
     pipe_through(:api)
 
-    get("/", ControllerAuthz, :index)
     post("/", ControllerAuthz, :verify)
     delete("/", ControllerAuthz, :refund)
   end
