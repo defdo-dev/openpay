@@ -34,6 +34,10 @@ jobs:
         mix local.rebar --force && mix local.hex --force
         [[ ! -z "${{ secrets.HEX_ORG_NAME }}" && ! -z "${{ secrets.HEX_ORG_TOKEN }}" ]] && mix hex.organization auth ${{ secrets.HEX_ORG_NAME }} --key ${{ secrets.HEX_ORG_TOKEN }} || echo "no hex org configured"
         mix deps.get
+      env:
+        OPENPAY_ID: ${{ secrets.OPENPAY_ID }}
+        OPENPAY_SK: ${{ secrets.OPENPAY_SK }}
+        OPENPAY_PK: ${{ secrets.OPENPAY_PK }}
 
     - name: Run Tests
       run: mix test
