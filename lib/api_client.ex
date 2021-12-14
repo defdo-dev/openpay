@@ -27,19 +27,19 @@ defmodule Openpay.ApiClient do
     |> Commons.from_json()
   end
 
-  def get_endpoint(:sandbox) do
+  def get_endpoint("sandbox") do
     "https://sandbox-api.openpay.mx/v1"
   end
 
-  def get_endpoint(:prod) do
+  def get_endpoint("prod") do
     "https://api.openpay.mx/v1"
   end
 
-  def get_endpoint_receipt(:sandbox) do
+  def get_endpoint_receipt("sandbox") do
     "https://sandbox-dashboard.openpay.mx/paynet-pdf"
   end
 
-  def get_endpoint_receipt(:prod) do
+  def get_endpoint_receipt("prod") do
     "https://dashboard.openpay.mx/paynet-pdf"
   end
 
