@@ -9,6 +9,7 @@ defmodule Openpay.MixProject do
       app: :openpay,
       version: "0.4.0",
       elixir: "~> 1.12",
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
@@ -53,18 +54,27 @@ defmodule Openpay.MixProject do
     ]
   end
 
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
+
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
       {:ecto, "~> 3.4"},
       {:money, "~> 1.9"},
-      {:httpoison, "~> 1.5"},  # * dynamic usage for this dependency
+      # * dynamic usage for this dependency
+      {:httpoison, "~> 1.5"},
       {:plug_cowboy, "~> 2.3"},
       {:jason, "~> 1.2"},
+      {:phoenix, "~> 1.6"},
+      {:tzdata, "~> 1.1"},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.14", only: :test},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:exvcr, "~> 0.10", only: [:dev, :test]}, # * could be replaced to use mock
+      # * could be replaced to use mock
+      {:exvcr, "~> 0.10", only: [:dev, :test]},
+      {:mox, "~> 1.0", only: :test},
       {:ex_doc, "~> 0.26", only: :dev, runtime: false}
     ]
   end
