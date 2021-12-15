@@ -24,7 +24,7 @@ defmodule Openpay.Authz.Stub.Refund do
   end
 
   # 96 => "The parameters are wrong"
-  def call(conn, _), do: json(conn, error_response("The parameters are wrong"))
+  def call(conn, _), do: json(conn, 409, error_response("The parameters are wrong"))
 
   def validate(conn, %{"folio" => "INVALID_REFUND"}) do
     json(conn, 412, error_response("Invalid reference number"))
