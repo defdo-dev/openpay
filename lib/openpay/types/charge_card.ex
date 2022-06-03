@@ -28,6 +28,9 @@ defmodule Openpay.Types.ChargeCard do
     field(:capture, :boolean, default: true)
     # optionals because they archive other workflows.
 
+    field(:use_3d_secure, :boolean, default: false)
+    field(:redirect_url, :string)
+
     embeds_one(:customer, Customer)
 
     # data for apply months without interest.
@@ -65,7 +68,7 @@ defmodule Openpay.Types.ChargeCard do
       :device_session_id
     ]
 
-    optional = [:device_session_id, :capture, :metadata]
+    optional = [:device_session_id, :capture, :use_3d_secure, :redirect_url, :metadata]
 
     charge_to_card
     |> cast(params, required ++ optional)
@@ -75,6 +78,7 @@ defmodule Openpay.Types.ChargeCard do
     |> validate_inclusion(:currency, ~w(MXN USD))
     |> has_customer?(params)
     |> has_payment_plan(params)
+    |> required_when_3d_secure()
   end
 
   defp has_customer?(changeset, %{customer: customer}) do
@@ -95,5 +99,13 @@ defmodule Openpay.Types.ChargeCard do
     schema
     |> cast(params, [:payments])
     |> validate_inclusion(:payments, ~w(3 6 9 12 18))
+  end
+
+  defp required_when_3d_secure(changeset) do
+    if get_field(changeset, :use_3d_secure) do
+      validate_required(changeset, [:redirect_url])
+    else
+      changeset
+    end
   end
 end
