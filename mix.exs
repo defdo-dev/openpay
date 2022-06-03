@@ -2,7 +2,7 @@ defmodule Openpay.MixProject do
   @moduledoc false
   use Mix.Project
 
-  @organization "paridincom"
+  @organization "defdo"
 
   def project do
     [
