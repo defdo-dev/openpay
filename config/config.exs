@@ -8,14 +8,13 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :phoenix, :json_library, Jason
-
 config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
 config :openpay, Openpay.Authz.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4000],
   https: [
     port: String.to_integer(System.get_env("HTTPS_PORT", "4001")),
-    otp_app: :defdo_wallet,
+    otp_app: :openpay,
     certfile: System.get_env("HTTPS_CERT_FILE") || "priv/ssl/openpay.pem",
     keyfile: System.get_env("HTTPS_KEY_FILE") || "priv/ssl/openpay_key.pem"
   ],
