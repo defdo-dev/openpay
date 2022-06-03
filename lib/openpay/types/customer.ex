@@ -11,8 +11,8 @@ defmodule Openpay.Types.Customer do
   embedded_schema do
     field(:external_id, :string)
     field(:creation_date, :string)
-    field(:name, :string, null: false)
-    field(:last_name, :string, null: false)
+    field(:name, :string)
+    field(:last_name, :string)
     field(:email, :string)
     field(:requires_account, :boolean, default: false)
     field(:phone_number, :string)
