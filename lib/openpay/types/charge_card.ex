@@ -20,7 +20,7 @@ defmodule Openpay.Types.ChargeCard do
     # Card ID if it exists otherwise token generated previously.
     field(:source_id, :string)
     # Card security code
-    field(:cvv2, :integer)
+    field(:cvv2, :string)
     field(:currency, :string)
     # anti-fraud token
     field(:device_session_id, :string)
