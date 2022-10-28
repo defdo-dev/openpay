@@ -1,3 +1,7 @@
+## 0.4.1
+  - Make optional the ConfigState
+  - Upgrade deps
+
 ## 0.4.0
   - Upgrade deps, and remove ecto_sql, and `timex` from project, those are replaced by `ecto` and `DateTime` respectively. [ecto_sql was separated from ecto.](https://github.com/elixir-ecto/ecto/issues/2558), There was no good reason to use Timex. The cases found can be handled with DateTime.
   - move organization from "paridincom" to "defdo".
