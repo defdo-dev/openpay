@@ -49,4 +49,8 @@ if Mix.env() == :test do
     merchant_id: "mjtkrswiqtxftemz4tgl",
     client_secret: "sk_da05dc98605d4e1d880582b4ee621e84",
     client_public: "pk_8ffec93a697248e881cd4f67d027f81a"
+
+  config :openpay, Openpay.Authz.BasicAuth,
+    username: "root_test",
+    password: "test"
 end
